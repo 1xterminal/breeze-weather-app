@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breeze Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Breeze Weather</h1>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Enter city name..."
+                    aria-label="Search for a city"
+                >
+                <button id="searchBtn" aria-label="Search">Search</button>
+            </div>
+            <div class="unit-toggle">
+                <button id="celsiusBtn" class="active">°C</button>
+                <button id="fahrenheitBtn">°F</button>
+            </div>
+        </header>
+
+        <main>
+            <div id="weatherInfo" class="weather-info">
+                <div class="current-weather">
+                    <!-- Weather data will be inserted here -->
+                </div>
+                <div class="forecast">
+                    <!-- Forecast data will be inserted here -->
+                </div>
+            </div>
+            <div id="loadingIndicator" class="loading hidden">Loading...</div>
+            <div id="errorMessage" class="error hidden"></div>
+        </main>
+    </div>
+
+    <script src="utils/helpers.js"></script>
+    <script src="api/weatherService.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
