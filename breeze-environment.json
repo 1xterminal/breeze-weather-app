@@ -1,0 +1,43 @@
+{
+  "id": "breeze-weather-env",
+  "name": "Breeze Weather Environment",
+  "values": [
+    {
+      "key": "api_key",
+      "value": "FN3WzABuPoKVyMlymqyssgF7a0Bq26qx",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "lat",
+      "value": "-6.2088",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "lon",
+      "value": "106.8456",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "city",
+      "value": "Jakarta",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_tomorrow",
+      "value": "https://api.tomorrow.io/v4/weather",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "base_url_nominatim",
+      "value": "https://nominatim.openstreetmap.org",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+} 

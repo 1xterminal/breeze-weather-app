@@ -1,0 +1,168 @@
+{
+  "info": {
+    "name": "Breeze Weather App API",
+    "description": "API collection for the Breeze Weather App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Tomorrow.io",
+      "description": "Weather data from Tomorrow.io API",
+      "item": [
+        {
+          "name": "Get Current Weather",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.tomorrow.io/v4/weather/realtime?location={{lat}},{{lon}}&apikey={{api_key}}&units=metric&fields=temperature,weatherCode,precipitationProbability,humidity,windSpeed",
+              "protocol": "https",
+              "host": ["api", "tomorrow", "io"],
+              "path": ["v4", "weather", "realtime"],
+              "query": [
+                {
+                  "key": "location",
+                  "value": "{{lat}},{{lon}}",
+                  "description": "Latitude and longitude coordinates"
+                },
+                {
+                  "key": "apikey",
+                  "value": "{{api_key}}",
+                  "description": "Tomorrow.io API key"
+                },
+                {
+                  "key": "units",
+                  "value": "metric",
+                  "description": "Temperature units (metric or imperial)"
+                },
+                {
+                  "key": "fields",
+                  "value": "temperature,weatherCode,precipitationProbability,humidity,windSpeed",
+                  "description": "Weather data fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get current weather data for a specific location"
+          }
+        },
+        {
+          "name": "Get Weather Forecast",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.tomorrow.io/v4/weather/forecast?location={{lat}},{{lon}}&apikey={{api_key}}&units=metric&fields=temperature,weatherCode,precipitationProbability,humidity,windSpeed&timesteps=1h",
+              "protocol": "https",
+              "host": ["api", "tomorrow", "io"],
+              "path": ["v4", "weather", "forecast"],
+              "query": [
+                {
+                  "key": "location",
+                  "value": "{{lat}},{{lon}}",
+                  "description": "Latitude and longitude coordinates"
+                },
+                {
+                  "key": "apikey",
+                  "value": "{{api_key}}",
+                  "description": "Tomorrow.io API key"
+                },
+                {
+                  "key": "units",
+                  "value": "metric",
+                  "description": "Temperature units (metric or imperial)"
+                },
+                {
+                  "key": "fields",
+                  "value": "temperature,weatherCode,precipitationProbability,humidity,windSpeed",
+                  "description": "Weather data fields to retrieve"
+                },
+                {
+                  "key": "timesteps",
+                  "value": "1h",
+                  "description": "Time interval for forecast data (1h = hourly)"
+                }
+              ]
+            },
+            "description": "Get hourly weather forecast for a specific location"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Geocoding",
+      "description": "Convert city names to coordinates using OpenStreetMap Nominatim",
+      "item": [
+        {
+          "name": "Get City Coordinates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "User-Agent",
+                "value": "Breeze Weather App",
+                "description": "Identify application to Nominatim service"
+              }
+            ],
+            "url": {
+              "raw": "https://nominatim.openstreetmap.org/search?format=json&q={{city}}",
+              "protocol": "https",
+              "host": ["nominatim", "openstreetmap", "org"],
+              "path": ["search"],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "key": "q",
+                  "value": "{{city}}",
+                  "description": "City name to search for"
+                }
+              ]
+            },
+            "description": "Convert a city name to latitude and longitude coordinates"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "api_key",
+      "value": "FN3WzABuPoKVyMlymqyssgF7a0Bq26qx",
+      "description": "Tomorrow.io API key"
+    },
+    {
+      "key": "lat",
+      "value": "40.7128",
+      "description": "Latitude (example: New York)"
+    },
+    {
+      "key": "lon",
+      "value": "-74.0060",
+      "description": "Longitude (example: New York)"
+    },
+    {
+      "key": "city",
+      "value": "Jakarta",
+      "description": "City name for geocoding"
+    }
+  ]
+}
