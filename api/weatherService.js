@@ -153,46 +153,59 @@ class WeatherService {
     }
 
     getWeatherIcon(code) {
-        // Mengkonversi kode cuaca dari Tomorrow.io ke deskripsi yang mudah dibaca
-        const weatherCodes = {
-            10001: 'clear-day', // Cerah
-            10000: 'clear-day', // Cerah
-            10001: 'clear-night', // Cerah malam
-
-            1100: 'mostly-clear-day', // Sebagian besar cerah
-            11000: 'mostly-clear-day', // Sebagian besar cerah
-            11001: 'mostly-clear-night', // Sebagian besar cerah
-
-            1101: 'partly-cloudy-day', // Berawan sebagian
-            11010: 'partly-cloudy-day', // Berawan sebagian
-            11011: 'partly-cloudy-night', // Berawan sebagian
-
-            1102: 'mostly-cloudy-day', // Sebagian besar berawan
-            11020: 'mostly-cloudy-day', // Sebagian besar berawan
-            11021: 'mostly-cloudy-night', // Sebagian besar berawan
-
-            1001: 'cloudy', // Berawan
-            2000: 'fog', // Berkabut
-
-            4000: 'drizzle', // Gerimis
-            4001: 'rain', // Hujan
-            4200: 'light-rain', // Hujan ringan
-            4201: 'heavy-rain', // Hujan lebat
-
-            5000: 'snow', // Salju
-            5001: 'flurries', // Salju ringan
-            5100: 'light-snow', // Salju ringan
-            5101: 'heavy-snow', // Salju lebat
-
-            6000: 'freezing-drizzle', // Gerimis membeku
-            6001: 'freezing-rain', // Hujan membeku
-            7000: 'sleet', // Hujan es
-            7101: 'heavy-sleet', // Hujan es lebat
-
-            8000: 'thunderstorm'  // Badai petir
+        // Mengkonversi kode cuaca dari Tomorrow.io ke nama ikon SVG
+        const weatherIconMap = {
+            // Basic weather codes
+            1000: 'clear-day',           // Cerah
+            1100: 'mostly-clear-day',    // Sebagian besar cerah
+            1101: 'partly-cloudy-day',   // Berawan sebagian
+            1102: 'mostly-cloudy-day',   // Sebagian besar berawan
+            1001: 'cloudy',              // Berawan
+            2000: 'fog',                 // Berkabut
+            
+            // Gerimis
+            4000: 'drizzle',             // Gerimis
+            4001: 'rain',                // Hujan
+            4200: 'light-rain',          // Hujan ringan
+            4201: 'heavy-rain',          // Hujan lebat
+            
+            // Salju
+            5000: 'snow',                // Salju
+            5001: 'flurries',            // Salju ringan
+            5100: 'light-snow',          // Salju ringan
+            5101: 'heavy-snow',          // Salju lebat
+            
+            // Membeku/Hujan campuran
+            6000: 'freezing-drizzle',    // Gerimis membeku
+            6001: 'freezing-rain',       // Hujan membeku
+            7000: 'sleet',               // Hujan es
+            7101: 'heavy-sleet',         // Hujan es lebat
+            
+            // Badai petir
+            8000: 'thunderstorm'         // Badai petir
         };
-
-        return weatherCodes[code] || 'unknown';
+        
+        // Cek apakah waktunya malam (jika diperlukan) dan sesuaikan ikon
+        const hour = new Date().getHours();
+        const isNight = hour >= 19 || hour < 6;
+        
+        // Dapatkan ikon dasar atau 'unknown' jika tidak ditemukan
+        let iconName = weatherIconMap[code] || 'unknown';
+        
+        // Untuk jenis cuaca tertentu, kami memiliki versi malam
+        if (isNight) {
+            if (code === 1000) {
+                iconName = 'clear-night';
+            } else if (code === 1100) {
+                iconName = 'mostly-clear-night';
+            } else if (code === 1101) {
+                iconName = 'partly-cloudy-night';
+            } else if (code === 1102) {
+                iconName = 'mostly-cloudy-night';
+            }
+        }
+        
+        return iconName;
     }
 }
 
