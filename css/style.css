@@ -53,6 +53,7 @@
 body {
     --gradColorStart: #8e9eab;
     --gradColorEnd: #eef2f3;
+    --logo-invert: 0; /* Default - dark logo */
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: linear-gradient(135deg, var(--gradColorStart), var(--gradColorEnd));
     background-size: 200%;
@@ -78,6 +79,7 @@ body {
 body.weather-clear {
     --gradColorStart: #43A9F1;
     --gradColorEnd: #3890F4;
+    --logo-invert: 1; /* Light logo for dark backgrounds */
     /* background: linear-gradient(135deg, var(--sunset-gradient-start), var(--sunset-gradient-end)); */
     color: var(--text-color);
 }
@@ -85,6 +87,7 @@ body.weather-clear {
 body.weather-cloudy {
     --gradColorStart: #DCAB07;
     --gradColorEnd: #CC7006;
+    --logo-invert: 1; /* Light logo for dark backgrounds */
     /* background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end)); */
     color: var(--text-color);
 }
@@ -92,6 +95,7 @@ body.weather-cloudy {
 body.weather-night {
     --gradColorStart: #0f2027;
     --gradColorEnd: #203a43;
+    --logo-invert: 1; /* Light logo for dark backgrounds */
     /* background: linear-gradient(135deg, var(--night-gradient-start), var(--night-gradient-end)); */
     color: var(--text-color);
 }
@@ -105,7 +109,8 @@ body.weather-night {
 
 .logo {
     height: 48px;
-    color: inherit;
+    filter: brightness(0) saturate(100%) invert(var(--logo-invert, 0));
+    transition: filter 0.5s ease;
 }
 
 .logo * {

@@ -2,8 +2,8 @@ class WeatherService {
     constructor() {
         // Konfigurasi API Tomorrow.io
         // API key disimpan sebagai variabel
-        // this.API_KEY = 'FN3WzABuPoKVyMlymqyssgF7a0Bq26qx'; // Javier's API Key
-        this.API_KEY = "zDsUaHf3sZ0tPiFohkWwNQUm6IPgc9bq"; // Advendra's API Key
+        this.API_KEY = 'FN3WzABuPoKVyMlymqyssgF7a0Bq26qx'; // Javier's API Key
+        // this.API_KEY = "zDsUaHf3sZ0tPiFohkWwNQUm6IPgc9bq"; // Advendra's API Key
         // URL dasar untuk API Tomorrow.io
         this.BASE_URL = 'https://api.tomorrow.io/v4/weather';
     }

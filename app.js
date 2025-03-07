@@ -144,6 +144,13 @@ class WeatherApp {
                 document.body.classList.add('weather-cloudy');
             }
         }
+        
+        // Force logo to update its appearance based on current weather
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            // This triggers a DOM reflow which ensures the filter transition is applied
+            void logo.offsetWidth;
+        }
     }
 
     updateForecast(forecast) {
