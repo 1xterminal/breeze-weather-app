@@ -106,6 +106,11 @@ Collection ini mencerminkan cara aplikasi Breeze berkomunikasi dengan API ekster
 
 ## Pengembang
 
-- Developed by [1xterminal](https://github.com/1xterminal), [ADeswanta](https://github.com/ADeswanta), and [CheeseCakeBernatrium](https://github.com/CheeseCakeBernatrium)
-- API Cuaca: [Tomorrow.io](https://www.tomorrow.io/)
-- Geocoding: [OpenStreetMap Nominatim](https://nominatim.org/)
+### Tim Pengembang:
+- Gian Kenar Javier (535240066) - [1xterminal](https://github.com/1xterminal)
+- Martin Cahyadi (535240069) - [CheeseCakeBernatrium](https://github.com/CheeseCakeBernatrium)
+- Advendra Adeswanta (535240073) - [ADeswanta](https://github.com/ADeswanta)
+
+### API yang Digunakan:
+- Data Cuaca: [Tomorrow.io](https://www.tomorrow.io/)
+- Layanan Geocoding: [OpenStreetMap Nominatim](https://nominatim.org/)
