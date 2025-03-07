@@ -155,38 +155,44 @@ class WeatherService {
     getWeatherIcon(code) {
         // Mengkonversi kode cuaca dari Tomorrow.io ke deskripsi yang mudah dibaca
         const weatherCodes = {
-            10000: 'clear-day',                 // Cerah
-            10001: 'clear-night',               // Cerah malam
+            10001: 'clear-day', // Cerah
+            10000: 'clear-day', // Cerah
+            10001: 'clear-night', // Cerah malam
 
-            11000: 'mostly-clear-day',        // Sebagian besar cerah
-            11001: 'mostly-clear-night',        // Sebagian besar cerah
+            1100: 'mostly-clear-day', // Sebagian besar cerah
+            11000: 'mostly-clear-day', // Sebagian besar cerah
+            11001: 'mostly-clear-night', // Sebagian besar cerah
 
-            11010: 'partly-cloudy-day',       // Berawan sebagian
-            11011: 'partly-cloudy-night',       // Berawan sebagian
+            1101: 'partly-cloudy-day', // Berawan sebagian
+            11010: 'partly-cloudy-day', // Berawan sebagian
+            11011: 'partly-cloudy-night', // Berawan sebagian
 
-            11020: 'mostly-cloudy-day',       // Sebagian besar berawan
-            11021: 'mostly-cloudy-night',       // Sebagian besar berawan
+            1102: 'mostly-cloudy-day', // Sebagian besar berawan
+            11020: 'mostly-cloudy-day', // Sebagian besar berawan
+            11021: 'mostly-cloudy-night', // Sebagian besar berawan
 
-            1001: 'cloudy',              // Berawan
-            2000: 'fog',                 // Berkabut
-            4000: 'drizzle',             // Gerimis
-            4001: 'rain',                // Hujan
-            4200: 'light-rain',          // Hujan ringan
-            4201: 'heavy-rain',          // Hujan lebat
+            1001: 'cloudy', // Berawan
+            2000: 'fog', // Berkabut
 
-            5000: 'snow',                // Salju
-            5001: 'flurries',            // Salju ringan
-            5100: 'light-snow',          // Salju ringan
-            5101: 'heavy-snow',          // Salju lebat
-            6000: 'freezing-drizzle',    // Gerimis membeku
-            6001: 'freezing-rain',       // Hujan membeku
-            7000: 'sleet',               // Hujan es
-            7101: 'heavy-sleet',         // Hujan es lebat
+            4000: 'drizzle', // Gerimis
+            4001: 'rain', // Hujan
+            4200: 'light-rain', // Hujan ringan
+            4201: 'heavy-rain', // Hujan lebat
 
-            8000: 'thunderstorm'         // Badai petir
+            5000: 'snow', // Salju
+            5001: 'flurries', // Salju ringan
+            5100: 'light-snow', // Salju ringan
+            5101: 'heavy-snow', // Salju lebat
+
+            6000: 'freezing-drizzle', // Gerimis membeku
+            6001: 'freezing-rain', // Hujan membeku
+            7000: 'sleet', // Hujan es
+            7101: 'heavy-sleet', // Hujan es lebat
+
+            8000: 'thunderstorm'  // Badai petir
         };
 
-        return weatherCodes[code] || 'Unknown';
+        return weatherCodes[code] || 'unknown';
     }
 }
 
