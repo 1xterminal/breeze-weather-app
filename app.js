@@ -7,6 +7,11 @@ class WeatherApp {
         this.dateDisplay = document.getElementById('date-display');
         this.weatherIcon = document.getElementById("weather-icon");
 
+        // Menambahkan properti baru
+        this.tempUnit = 'C'; // Default menggunakan Celsius
+        this.tempValue = null; // Menyimpan nilai suhu saat ini
+        this.forecast = null; // Menyimpan data prakiraan cuaca
+
         // Menjalankan fungsi inisialisasi waktu dan event listener
         this.initializeDateTime();
         this.bindEvents();
@@ -14,7 +19,7 @@ class WeatherApp {
         // Menambahkan fungsi drag scroll untuk forecast
         this.initDragScroll();
 
-        // Set background based on time of day
+        // Mengatur latar belakang berdasarkan waktu hari
         this.setTimeBasedBackground();
     }
 
@@ -27,10 +32,21 @@ class WeatherApp {
             }
         });
 
-        // Search icon click
-        document.querySelector('.search-icon').addEventListener('click', () => {
-            this.handleSearch();
-        });
+        // Event ketika klik icon pencarian
+        const searchIcon = document.querySelector('.fa-location-dot');
+        if (searchIcon) {
+            searchIcon.addEventListener('click', () => {
+                this.handleSearch();
+            });
+        }
+
+        // Menambahkan event listener untuk tombol pergantian unit suhu
+        const unitButtons = document.querySelectorAll('.unit-btn');
+        if (unitButtons.length > 0) {
+            unitButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => this.handleUnitChange(e.target));
+            });
+        }
     }
 
     initializeDateTime() {
@@ -61,10 +77,10 @@ class WeatherApp {
     setTimeBasedBackground() {
         const hour = new Date().getHours();
 
-        // Clear any existing classes
+        // Menghapus kelas yang ada
         document.body.classList.remove('weather-clear', 'weather-cloudy', 'weather-night');
 
-        // Night time (7PM - 6AM)
+        // Malam hari (19:00 - 06:00)
         if (hour >= 19 || hour < 6) {
             document.body.classList.add('weather-night');
         }
@@ -89,7 +105,7 @@ class WeatherApp {
         } catch (error) {
             // Menangani error jika terjadi masalah saat mengambil data
             console.error('Error fetching weather:', error);
-            this.showError('Could not fetch weather data API limit reached max. Please try again later.');
+            this.showError('Tidak dapat mengambil data cuaca. Batas API tercapai. Silakan coba lagi nanti.');
         } finally {
             // Menghilangkan status loading
             this.setLoadingState(false);
@@ -101,26 +117,46 @@ class WeatherApp {
         if (isLoading) {
             document.querySelector('.temp-value').textContent = '--';
             document.querySelector('.description').textContent = 'Loading...';
-            this.forecastList.innerHTML = '<div class="forecast-item">Loading forecasts...</div>';
+            this.forecastList.innerHTML = '<div class="forecast-item">Memuat prakiraan...</div>';
         }
     }
 
     updateWeatherInfo(data) {
+        // Menyimpan suhu dalam Celsius untuk konversi nantinya
+        this.tempValue = data.temperature;
+
         // Mengekstrak data cuaca yang diperlukan
-        const { temperature, description, icon, humidity, windSpeed, precipitationProbability } = data;
+        const { description, icon, humidity, windSpeed, precipitationProbability } = data;
 
         // Memperbarui informasi cuaca utama
-        // document.querySelector('.location-text').textContent = this.cityInput.value;
-        document.querySelector('.temp-value').textContent = Math.round(temperature);
+        let displayTemp = this.tempValue;
+        if (this.tempUnit === 'F') {
+            displayTemp = helpers.celsiusToFahrenheit(this.tempValue);
+        }
+        
+        document.querySelector('.temp-value').textContent = Math.round(displayTemp);
+        document.querySelector('.temp-unit').textContent = `°${this.tempUnit}`;
         document.querySelector('.description').textContent = description;
 
-        // Min/max temperature (simulated for now)
-        const minTemp = Math.round(temperature - 2);
-        const maxTemp = Math.round(temperature + 2);
-        document.querySelector('.min-temp').innerHTML = `<i class="fas fa-arrow-down"></i> ${minTemp}°`;
-        document.querySelector('.max-temp').innerHTML = `<i class="fas fa-arrow-up"></i> ${maxTemp}°`;
+        // Suhu min/max (disimulasikan)
+        const minTemp = Math.round(this.tempValue - 2);
+        const maxTemp = Math.round(this.tempValue + 2);
+        
+        let displayMinTemp, displayMaxTemp;
+        if (this.tempUnit === 'F') {
+            displayMinTemp = Math.round(helpers.celsiusToFahrenheit(minTemp));
+            displayMaxTemp = Math.round(helpers.celsiusToFahrenheit(maxTemp));
+        } else {
+            displayMinTemp = minTemp;
+            displayMaxTemp = maxTemp;
+        }
+        
+        document.querySelector('.min-temp').innerHTML = 
+            `<i class="fas fa-arrow-down"></i> ${displayMinTemp}°`;
+        document.querySelector('.max-temp').innerHTML = 
+            `<i class="fas fa-arrow-up"></i> ${displayMaxTemp}°`;
 
-        // Update weather details
+        // Memperbarui detail cuaca
         document.querySelector('.humidity').textContent = `${Math.round(humidity)}%`;
         document.querySelector('.wind-speed').textContent = `${Math.round(windSpeed)} km/h`;
 
@@ -131,11 +167,11 @@ class WeatherApp {
 
         const hour = new Date().getHours();
 
-        // Night time (7PM - 6AM)
+        // Malam hari (19:00 - 06:00)
         if (hour >= 19 || hour < 6) {
             document.body.classList.add('weather-night');
         } else {
-            // Day time backgrounds
+            // Latar belakang siang hari
             if (description.includes('Clear') || description.includes('Sunny')) {
                 document.body.classList.add('weather-clear');
             } else if (description.includes('Cloud') || description.includes('Fog') ||
@@ -145,26 +181,35 @@ class WeatherApp {
             }
         }
         
-        // Force logo to update its appearance based on current weather
+        // Memaksa logo untuk memperbarui tampilannya berdasarkan cuaca saat ini
         const logo = document.querySelector('.logo');
         if (logo) {
-            // This triggers a DOM reflow which ensures the filter transition is applied
+            // Ini memicu reflow DOM yang memastikan transisi filter diterapkan
             void logo.offsetWidth;
         }
     }
 
     updateForecast(forecast) {
-        // Membersihkan daftar ramalan cuaca yang lama
+        // Menyimpan data prakiraan untuk konversi unit
+        this.forecast = forecast;
+        
         this.forecastList.innerHTML = '';
-
-        // Menampilkan pesan jika tidak ada data ramalan
+        
         if (!forecast || forecast.length === 0) {
-            this.forecastList.innerHTML = '<div class="forecast-item">No forecast available</div>';
+            this.forecastList.innerHTML = '<div class="forecast-item">Tidak ada prakiraan tersedia</div>';
             return;
         }
-
-        // Menambahkan item ramalan cuaca baru
+        
+        // Memastikan kita memiliki unit yang terdefinisi
+        const unit = this.tempUnit || 'C';
+        
         forecast.forEach(item => {
+            // Mengkonversi suhu jika diperlukan
+            let displayTemp = item.temperature;
+            if (unit === 'F') {
+                displayTemp = helpers.celsiusToFahrenheit(item.temperature);
+            }
+            
             const forecastItem = document.createElement('div');
             forecastItem.className = 'forecast-item';
             forecastItem.innerHTML = `
@@ -172,7 +217,7 @@ class WeatherApp {
                 <div class="forecast-icon">
                     <i class="${this.getWeatherIcon(item.description)}"></i>
                 </div>
-                <div class="forecast-temp">${Math.round(item.temperature)}°</div>
+                <div class="forecast-temp">${Math.round(displayTemp)}°${unit}</div>
             `;
             this.forecastList.appendChild(forecastItem);
         });
@@ -275,6 +320,60 @@ class WeatherApp {
             const walk = (x - startX) * 2;
             slider.scrollLeft = scrollLeft - walk;
         });
+    }
+
+    handleUnitChange(btnElement) {
+        const newUnit = btnElement.dataset.unit;
+        
+        if (newUnit === this.tempUnit) return; // Tidak perlu perubahan
+        
+        // Memperbarui status tombol aktif
+        document.querySelectorAll('.unit-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        btnElement.classList.add('active');
+        
+        // Menyimpan unit baru
+        this.tempUnit = newUnit;
+        
+        // Memperbarui tampilan suhu jika kita memiliki data
+        if (this.tempValue !== null) {
+            this.updateTemperatureDisplays();
+        }
+    }
+    
+    updateTemperatureDisplays() {
+        // Suhu utama
+        let displayTemp = this.tempValue;
+        if (this.tempUnit === 'F') {
+            displayTemp = helpers.celsiusToFahrenheit(this.tempValue);
+        }
+        
+        document.querySelector('.temp-value').textContent = Math.round(displayTemp);
+        document.querySelector('.temp-unit').textContent = `°${this.tempUnit}`;
+        
+        // Suhu min/max
+        const minTemp = this.tempValue - 2;
+        const maxTemp = this.tempValue + 2;
+        
+        let displayMinTemp, displayMaxTemp;
+        if (this.tempUnit === 'F') {
+            displayMinTemp = helpers.celsiusToFahrenheit(minTemp);
+            displayMaxTemp = helpers.celsiusToFahrenheit(maxTemp);
+        } else {
+            displayMinTemp = minTemp;
+            displayMaxTemp = maxTemp;
+        }
+        
+        document.querySelector('.min-temp').innerHTML = 
+            `<i class="fas fa-arrow-down"></i> ${Math.round(displayMinTemp)}°`;
+        document.querySelector('.max-temp').innerHTML = 
+            `<i class="fas fa-arrow-up"></i> ${Math.round(displayMaxTemp)}°`;
+        
+        // Memperbarui prakiraan jika tersedia
+        if (this.forecast) {
+            this.updateForecast(this.forecast);
+        }
     }
 }
 

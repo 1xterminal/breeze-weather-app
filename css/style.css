@@ -473,3 +473,33 @@ span.separator {
 .hidden {
     display: none;
 }
+
+/* Add these styles for the temperature unit toggle */
+.unit-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.unit-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.unit-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+
+.unit-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}

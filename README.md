@@ -1,4 +1,19 @@
-# Breeze App
+# Breeze - Aplikasi Cuaca
+
+Breeze adalah aplikasi cuaca modern dengan antarmuka pengguna yang intuitif untuk menampilkan informasi cuaca saat ini dan perkiraan cuaca per jam. Aplikasi ini menggunakan API Tomorrow.io untuk mendapatkan data cuaca terkini dengan tampilan visual yang menarik.
+
+## Fitur Aplikasi
+
+- **Pencarian Kota**: Cari informasi cuaca untuk lokasi manapun di dunia
+- **Tampilan Cuaca Saat Ini**: Menampilkan suhu, deskripsi cuaca, kelembaban, dan kecepatan angin
+- **Perkiraan Per Jam**: Lihat perkiraan cuaca untuk 5 jam ke depan
+- **Konversi Satuan**: Beralih antara derajat Celcius (°C) dan Fahrenheit (°F)
+- **Tema Dinamis**: Warna latar belakang berubah sesuai dengan kondisi cuaca dan waktu hari
+- **UI Responsif**: Tampilan yang menyesuaikan dengan ukuran layar perangkat
+- **Ikon Cuaca**: Representasi visual dari kondisi cuaca saat ini
+- **Waktu Lokal**: Menampilkan waktu dan tanggal saat ini
+
+## Struktur Direktori
 
 ```js
 breeze-weather-app/               // root folder kita
@@ -14,3 +29,52 @@ breeze-weather-app/               // root folder kita
 │   ├── icons/
 └── README.md                     // dokumentasi (cara pengunaan, etc)
 ```
+
+## Cara Menjalankan Aplikasi
+
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/1xterminal/breeze-weather-app.git
+   cd breeze-weather-app
+   ```
+
+2. **Buka Aplikasi**
+   - Buka file `index.html` di browser web Anda
+   - Atau gunakan server lokal seperti Live Server di VSCode
+
+3. **API Key**
+   - Aplikasi ini menggunakan API key Tomorrow.io yang sudah disediakan
+   - Jika ingin menggunakan API key sendiri, ganti nilai `API_KEY` di file `weatherService.js`
+
+## Contoh Penggunaan
+
+1. **Mencari Informasi Cuaca**
+   - Ketik nama kota di kotak pencarian (misalnya "Jakarta", "Surabaya", "Bandung")
+   - Tekan Enter atau klik ikon pencarian
+   - Informasi cuaca saat ini dan perkiraan per jam akan ditampilkan
+
+2. **Mengubah Satuan Suhu**
+   - Klik tombol °C atau °F di pojok kanan atas kartu cuaca
+   - Semua nilai suhu akan dikonversi ke satuan yang dipilih
+
+3. **Melihat Perkiraan Per Jam**
+   - Perkiraan per jam ditampilkan di bagian bawah aplikasi
+   - Geser ke kiri/kanan untuk melihat perkiraan jam berikutnya
+
+## Teknologi yang Digunakan
+
+- HTML5, CSS3, dan JavaScript murni (tanpa framework)
+- API Tomorrow.io untuk data cuaca
+- OpenStreetMap Nominatim API untuk pencarian lokasi
+- Font Awesome untuk ikon
+
+## Batasan
+
+- API Tomorrow.io memiliki batas penggunaan 25 permintaan per hari untuk versi gratis
+- Beberapa data seperti rentang suhu min/max disimulasikan
+
+## Pengembang
+
+- Developed by [1xterminal](https://github.com/1xterminal), [ADeswanta](https://github.com/ADeswanta), and [CheeseCakeBernatrium](https://github.com/CheeseCakeBernatrium)
+- API Cuaca: [Tomorrow.io](https://www.tomorrow.io/)
+- Geocoding: [OpenStreetMap Nominatim](https://nominatim.org/)
