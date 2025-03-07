@@ -89,7 +89,7 @@ class WeatherApp {
         } catch (error) {
             // Menangani error jika terjadi masalah saat mengambil data
             console.error('Error fetching weather:', error);
-            this.showError('Could not fetch weather data. Please try again.');
+            this.showError('Could not fetch weather data API limit reached max. Please try again later.');
         } finally {
             // Menghilangkan status loading
             this.setLoadingState(false);
