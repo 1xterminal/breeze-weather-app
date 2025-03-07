@@ -121,9 +121,9 @@ body.weather-night {
     /* max-width: 400px; */
     display: inline-flex;
     position: relative;
-    margin-bottom: 2rem;
+    gap: 12px;
 
-    padding: 1rem 3rem 1rem 1.5rem;
+    padding: 12px 20px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 50px;
@@ -215,7 +215,8 @@ body.weather-night {
     width: 100%;
 }
 
-.weather-app .content > div {
+.weather-app .content > div,
+.weather-app .content .card > div {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -246,6 +247,12 @@ body.weather-night {
     box-shadow:
         0 8px 20px hsla(0 0 0 / .2),
         inset 0 4px 60px hsla(0 0 100% / .2);
+}
+
+.weather-app .content .bottom span {
+    opacity: .5;
+    color: inherit;
+    font-size: .9rem;
 }
 
 .weather-summary {
@@ -317,28 +324,34 @@ span.separator {
 
 .weather-details {
     display: flex;
-    justify-content: space-between;
     gap: 1rem;
 }
 
 .detail {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    /* align-items: center; */
+    gap: 10px;
     background: rgba(255, 255, 255, 0.2);
-    padding: 1rem;
-    border-radius: 15px;
+    padding: 12px;
+    border-radius: 8px;
     flex: 1;
 }
 
 .detail i {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     opacity: 0.8;
 }
 
 .detail-label {
     font-size: 0.85rem;
     opacity: 0.8;
+    white-space: nowrap;
+}
+
+.detail-value {
+    font-weight: 600;
+    font-size: 1.2rem;
+    white-space: nowrap;
 }
 
 #forecast-section h3 {
