@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breeze Weather App</title>
 
-    <!-- Favicon -->
+    <!-- Menambahkan Fav Icon -->
     <link rel="icon" type="image/svg+xml" href="./assets/icons/logo-icon.svg">
 
     <link rel="stylesheet" href="css/style.css">
-    <!-- Add Font Awesome for weather icons -->
+    <!-- Menambahkan font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <!-- Bagian utama weather app -->
         <div class="weather-app">
+            <!-- Bagian yang menampilkan informasi cuaca -->
             <div class="content">
+                <!-- Menampilkan logo dan card -->
                 <div id="weatherInfo">
                     <object class="logo" data="./assets/logo-full.svg" type="image/svg+xml">
                         <img src="./assets/logo-full.svg" alt="Breeze Weather Logo">
@@ -24,6 +27,7 @@
                     <div class="card">
 
                         <div class="top">
+                            <!-- Bagian search box -->
                             <div class="search-box">
                                 <i class="fas fa-location-dot"></i>
                                 <input
@@ -32,13 +36,8 @@
                                     placeholder="Enter a city name"
                                     aria-label="Enter a city name"
                                 >
-                                <!-- <span class="location-text">Enter a city name</span> -->
                             </div>
-
-                            <!-- <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div> -->
-
+                            <!-- Menampilkan logo dan kartu serta informasi tentang cuacanya-->
                             <div class="weather-summary">
                                 <object id="weather-icon" data="./assets/icons/weather-unknown.svg"></object>
                                 <div class="detailed">
@@ -59,10 +58,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="date-today">Today, </div> -->
-
                         <div class="bottom">
+                            <!-- Menampilkan icon dan informasi wind speed serta humidity -->
                             <div class="weather-details">
                                 <div class="detail">
                                     <i class="fas fa-wind"></i>
@@ -83,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Menampilkan ramalan cuaca untuk 5 jam ke depan-->
                 <div id="forecast-section">
                     <h3>Hourly Forecast</h3>
                     <div class="forecast-list">
@@ -90,17 +88,18 @@
                     </div>
                 </div>
             </div>
+            <!-- Menampilkan jam local machine -->
             <div class="dateTime">
                 <i class="fas fa-clock"></i>
                 <div class="detailed">
                     <div class="time">--:--</div>
-                    <!-- <div class="detail-label">Time</div> -->
                     <span id="date-display"></span>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Import atau memanggil javascript -->
     <script src="utils/helpers.js"></script>
     <script src="api/weatherService.js"></script>
     <script src="app.js"></script>
