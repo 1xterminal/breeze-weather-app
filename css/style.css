@@ -5,17 +5,9 @@
     --secondary-color: #666;
     --text-color: #fff;
     --accent-color: #b8c6db;
-    --gradient-start: #8e9eab;
-    --gradient-end: #eef2f3;
     --card-background: rgba(255, 255, 255, 0.2);
     --shadow-color: rgba(0, 0, 0, 0.1);
     --border-color: rgba(255, 255, 255, 0.3);
-    --blue-gradient-start: #43A9F1;
-    --blue-gradient-end: #3890F4;
-    --sunset-gradient-start: #DCAB07;
-    --sunset-gradient-end: #CC7006;
-    --night-gradient-start: #0f2027;
-    --night-gradient-end: #203a43;
 }
 
 * {
@@ -40,19 +32,19 @@
 
 @property --gradColorStart {
     syntax: '<color>';
-    initial-value: var(--gradient-start);
+    initial-value: #8e9eab;
     inherits: false;
 }
 
 @property --gradColorEnd {
     syntax: '<color>';
-    initial-value: var(--gradient-end);
+    initial-value: #eef2f3;
     inherits: false;
 }
 
 body {
-    --gradColorStart: #8e9eab;
-    --gradColorEnd: #eef2f3;
+    /* --gradColorStart: #8e9eab;
+    --gradColorEnd: #eef2f3; */
     --logo-invert: 0; /* Default - dark logo */
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: linear-gradient(135deg, var(--gradColorStart), var(--gradColorEnd));
@@ -63,9 +55,7 @@ body {
     width: 70%;
     min-height: 100vh;
     background-attachment: fixed;
-    transition:
-        --gradColorStart 2s,
-        --gradColorEnd 2s;
+    transition: --gradColorStart 1s, --gradColorEnd 1s;
     animation:
         gradient-animation 40s ease infinite;
 
@@ -85,8 +75,8 @@ body.weather-clear {
 }
 
 body.weather-cloudy {
-    --gradColorStart: #DCAB07;
-    --gradColorEnd: #CC7006;
+    --gradColorStart: #8998A9;
+    --gradColorEnd: #697E9B;
     --logo-invert: 1; /* Light logo for dark backgrounds */
     /* background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end)); */
     color: var(--text-color);
@@ -94,7 +84,7 @@ body.weather-cloudy {
 
 body.weather-night {
     --gradColorStart: #0f2027;
-    --gradColorEnd: #203a43;
+    --gradColorEnd: #0E3589;
     --logo-invert: 1; /* Light logo for dark backgrounds */
     /* background: linear-gradient(135deg, var(--night-gradient-start), var(--night-gradient-end)); */
     color: var(--text-color);
