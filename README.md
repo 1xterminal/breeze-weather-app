@@ -22,11 +22,13 @@ breeze-weather-app/               // root folder kita
 │   └── styles.css                // untuk mengatur tampilan dan layout aplikasi            
 ├── app.js                        // file js utama -> mengatur logika aplikasi, event, dan interaksi pengguna
 ├── api/
-│   ├── weatherService.js         // modul api isinya fungsi untuk ngambil dan memproses data cuaca dari API eksternal (OpenWeather)
+│   ├── weatherService.js         // modul api isinya fungsi untuk ngambil dan memproses data cuaca dari API eksternal (Tomorrow.io)
 ├── utils/
 │   ├── helpers.js                // util nyimpen helper functions untuk format data, konversi satuan, validasi, dll.
 ├── assets/                       // folder aset utk nyimpen file statis kek gambar, ikon, dan font
 │   ├── icons/
+├── breeze-postman-collection.json // kumpulan request API untuk Postman
+├── breeze-environment.json       // variabel lingkungan untuk Postman
 └── README.md                     // dokumentasi (cara pengunaan, etc)
 ```
 
@@ -60,6 +62,35 @@ breeze-weather-app/               // root folder kita
 3. **Melihat Perkiraan Per Jam**
    - Perkiraan per jam ditampilkan di bagian bawah aplikasi
    - Geser ke kiri/kanan untuk melihat perkiraan jam berikutnya
+
+## Menggunakan Postman Collection
+
+Repository ini dilengkapi dengan file Postman Collection dan Environment untuk memudahkan pengujian API:
+
+1. **Import ke Postman**
+   - Buka Postman
+   - Klik tombol "Import" di kiri atas
+   - Pilih file `breeze-postman-collection.json` dan `breeze-environment.json`
+
+2. **Mengaktifkan Environment**
+   - Setelah import, pilih "Breeze Weather Environment" dari dropdown environment di kanan atas
+   - Environment berisi variabel seperti API key, koordinat default, dan nama kota
+
+3. **Menggunakan Collection**
+   - Kumpulan request dibagi menjadi dua folder:
+     - **Tomorrow.io**: Untuk mengakses data cuaca (realtime dan forecast)
+     - **Geocoding**: Untuk mengkonversi nama kota menjadi koordinat
+
+4. **Alur Pengujian API**
+   - Pertama, jalankan request "Get City Coordinates" untuk mendapatkan koordinat dari nama kota
+   - Salin nilai latitude dan longitude ke variabel environment
+   - Kemudian jalankan "Get Current Weather" atau "Get Weather Forecast"
+
+5. **Melihat dan Mengubah Variabel**
+   - Klik ikon mata (Environment quick look) di kanan atas
+   - Anda dapat melihat dan mengubah variabel seperti api_key, lat, lon, dan city
+
+Collection ini mencerminkan cara aplikasi Breeze berkomunikasi dengan API eksternal dan dapat digunakan untuk pengujian atau pengembangan lebih lanjut.
 
 ## Teknologi yang Digunakan
 
