@@ -2,7 +2,8 @@ class WeatherService {
     constructor() {
         // Konfigurasi API Tomorrow.io
         // API key disimpan sebagai variabel
-        this.API_KEY = 'FN3WzABuPoKVyMlymqyssgF7a0Bq26qx';
+        // this.API_KEY = 'FN3WzABuPoKVyMlymqyssgF7a0Bq26qx'; // Javier's API Key
+        this.API_KEY = "zDsUaHf3sZ0tPiFohkWwNQUm6IPgc9bq"; // Advendra's API Key
         // URL dasar untuk API Tomorrow.io
         this.BASE_URL = 'https://api.tomorrow.io/v4/weather';
     }
@@ -11,7 +12,7 @@ class WeatherService {
         try {
             // Mendapatkan koordinat dari nama kota
             const coords = await this.getCoordinates(city);
-            
+
             // Menentukan field data cuaca yang akan diminta
             const fields = [
                 'temperature',     // Suhu
@@ -88,7 +89,7 @@ class WeatherService {
             const response = await fetch(
                 `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`
             );
-            
+
             if (!response.ok) {
                 throw new Error('City not found');
             }
@@ -117,6 +118,7 @@ class WeatherService {
         return {
             temperature: values.temperature,
             description: this.getWeatherDescription(values.weatherCode),
+            icon: this.getWeatherIcon(values.weatherCode),
             humidity: values.humidity,
             windSpeed: values.windSpeed,
             precipitationProbability: values.precipitationProbability
@@ -149,7 +151,44 @@ class WeatherService {
 
         return weatherCodes[code] || 'Unknown';
     }
+
+    getWeatherIcon(code) {
+        // Mengkonversi kode cuaca dari Tomorrow.io ke deskripsi yang mudah dibaca
+        const weatherCodes = {
+            10000: 'clear-day',                 // Cerah
+            10001: 'clear-night',               // Cerah malam
+
+            11000: 'mostly-clear-day',        // Sebagian besar cerah
+            11001: 'mostly-clear-night',        // Sebagian besar cerah
+
+            11010: 'partly-cloudy-day',       // Berawan sebagian
+            11011: 'partly-cloudy-night',       // Berawan sebagian
+
+            11020: 'mostly-cloudy-day',       // Sebagian besar berawan
+            11021: 'mostly-cloudy-night',       // Sebagian besar berawan
+
+            1001: 'cloudy',              // Berawan
+            2000: 'fog',                 // Berkabut
+            4000: 'drizzle',             // Gerimis
+            4001: 'rain',                // Hujan
+            4200: 'light-rain',          // Hujan ringan
+            4201: 'heavy-rain',          // Hujan lebat
+
+            5000: 'snow',                // Salju
+            5001: 'flurries',            // Salju ringan
+            5100: 'light-snow',          // Salju ringan
+            5101: 'heavy-snow',          // Salju lebat
+            6000: 'freezing-drizzle',    // Gerimis membeku
+            6001: 'freezing-rain',       // Hujan membeku
+            7000: 'sleet',               // Hujan es
+            7101: 'heavy-sleet',         // Hujan es lebat
+
+            8000: 'thunderstorm'         // Badai petir
+        };
+
+        return weatherCodes[code] || 'Unknown';
+    }
 }
 
 // Membuat dan mengekspor instance tunggal dari WeatherService
-const weatherService = new WeatherService(); 
+const weatherService = new WeatherService();

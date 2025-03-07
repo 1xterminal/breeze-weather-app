@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breeze Weather App</title>
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="./assets/icons/LOGO-ROUND-SVG.svg">
-    
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/logo-icon.svg">
+
     <link rel="stylesheet" href="css/style.css">
     <!-- Add Font Awesome for weather icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,73 +15,78 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <img src="./assets/icons/LOGO-ROUND-SVG.svg" height="50" width="50" alt="logo">
-            <p class="logo-text">Breeze</p>
-        </div>
-        
-        <div class="search-box">
-            <input 
-                type="text" 
-                id="cityInput" 
-                placeholder="Search location"
-                aria-label="Search for a city"
-            >
-            <i class="fas fa-search search-icon"></i>
-        </div>
-
         <div class="weather-app">
-            <div class="weather-card">
-                <div id="weatherInfo" class="weather-info">
-                    <div class="location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="location-text">Enter a city name</span>
-                    </div>
-                    
-                    <div class="date-today">Today, <span id="date-display"></span></div>
-                    
-                    <div class="temperature-display">
-                        <span class="temp-value">--</span>
-                        <span class="temp-unit">°C</span>
-                    </div>
-                    
-                    <div class="description">--</div>
-                    
-                    <div class="temp-range">
-                        <span class="min-temp"><i class="fas fa-arrow-down"></i> --°</span>
-                        <span class="max-temp"><i class="fas fa-arrow-up"></i> --°</span>
-                    </div>
+            <div class="content">
+                <div id="weatherInfo">
+                    <object class="logo" data="./assets/logo-full.svg"></object>
+                    <div class="card">
 
-                    <div class="weather-details">
-                        <div class="detail">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <div class="detail-value time">--:--</div>
-                                <div class="detail-label">Time</div>
+                        <div class="top">
+                            <div class="search-box">
+                                <i class="fas fa-search search-icon"></i>
+                                <input
+                                    type="text"
+                                    id="cityInput"
+                                    placeholder="Enter a city name"
+                                    aria-label="Enter a city name"
+                                >
+                                <!-- <span class="location-text">Enter a city name</span> -->
+                            </div>
+
+                            <!-- <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div> -->
+
+                            <div class="weather-summary">
+                                <object id="weather-icon" data="./assets/icons/weather-unknown.svg"></object>
+                                <div class="detailed">
+                                    <div class="temperature-display">
+                                        <span class="temp-value">--</span>
+                                        <span class="temp-unit">°C</span>
+                                    </div>
+                                    <div class="description">--</div>
+                                    <div class="temp-range">
+                                        <span class="min-temp"><i class="fas fa-arrow-down"></i> --°</span>
+                                        <span class="separator"></span>
+                                        <span class="max-temp"><i class="fas fa-arrow-up"></i> --°</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="detail">
-                            <i class="fas fa-wind"></i>
-                            <div>
-                                <div class="detail-value wind-speed">-- km/h</div>
-                                <div class="detail-label">Wind</div>
+
+                        <!-- <div class="date-today">Today, </div> -->
+
+                        <div class="bottom weather-details">
+                            <div class="detail">
+                                <i class="fas fa-wind"></i>
+                                <div>
+                                    <div class="detail-label">Wind</div>
+                                    <div class="detail-value wind-speed">-- km/h</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="detail">
-                            <i class="fas fa-tint"></i>
-                            <div>
-                                <div class="detail-value humidity">--%</div>
-                                <div class="detail-label">Humidity</div>
+                            <div class="detail">
+                                <i class="fas fa-tint"></i>
+                                <div>
+                                    <div class="detail-label">Humidity</div>
+                                    <div class="detail-value humidity">--%</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="forecast-section">
+                    <h3>Hourly Forecast</h3>
+                    <div class="forecast-list">
+                        <div class="forecast-item">Loading forecasts...</div>
+                    </div>
+                </div>
             </div>
-
-            <div class="forecast-section">
-                <h3>Hourly Forecast</h3>
-                <div class="forecast-list">
-                    <div class="forecast-item">Loading forecasts...</div>
+            <div class="dateTime">
+                <i class="fas fa-clock"></i>
+                <div class="detailed">
+                    <div class="time">--:--</div>
+                    <!-- <div class="detail-label">Time</div> -->
+                    <span id="date-display"></span>
                 </div>
             </div>
         </div>

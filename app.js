@@ -5,6 +5,7 @@ class WeatherApp {
         this.weatherInfo = document.querySelector('.weather-info');
         this.forecastList = document.querySelector('.forecast-list');
         this.dateDisplay = document.getElementById('date-display');
+        this.weatherIcon = document.getElementById("weather-icon");
 
         // Menjalankan fungsi inisialisasi waktu dan event listener
         this.initializeDateTime();
@@ -40,7 +41,7 @@ class WeatherApp {
 
     updateDateTime() {
         const now = new Date();
-        
+
         // Memperbarui tampilan waktu dengan format 24 jam (HH:mm)
         const timeElement = document.querySelector('.time');
         timeElement.textContent = now.toLocaleTimeString('en-US', {
@@ -59,10 +60,10 @@ class WeatherApp {
 
     setTimeBasedBackground() {
         const hour = new Date().getHours();
-        
+
         // Clear any existing classes
         document.body.classList.remove('weather-clear', 'weather-cloudy', 'weather-night');
-        
+
         // Night time (7PM - 6AM)
         if (hour >= 19 || hour < 6) {
             document.body.classList.add('weather-night');
@@ -80,7 +81,7 @@ class WeatherApp {
 
             // Mengambil data cuaca dari API
             const weatherData = await weatherService.getWeatherData(city);
-            
+
             // Memperbarui tampilan dengan data yang baru
             this.updateWeatherInfo(weatherData);
             this.updateForecast(weatherData.forecast);
@@ -106,28 +107,30 @@ class WeatherApp {
 
     updateWeatherInfo(data) {
         // Mengekstrak data cuaca yang diperlukan
-        const { temperature, description, humidity, windSpeed, precipitationProbability } = data;
-        
+        const { temperature, description, icon, humidity, windSpeed, precipitationProbability } = data;
+
         // Memperbarui informasi cuaca utama
-        document.querySelector('.location-text').textContent = this.cityInput.value;
+        // document.querySelector('.location-text').textContent = this.cityInput.value;
         document.querySelector('.temp-value').textContent = Math.round(temperature);
         document.querySelector('.description').textContent = description;
-        
+
         // Min/max temperature (simulated for now)
         const minTemp = Math.round(temperature - 2);
         const maxTemp = Math.round(temperature + 2);
         document.querySelector('.min-temp').innerHTML = `<i class="fas fa-arrow-down"></i> ${minTemp}°`;
         document.querySelector('.max-temp').innerHTML = `<i class="fas fa-arrow-up"></i> ${maxTemp}°`;
-        
+
         // Update weather details
         document.querySelector('.humidity').textContent = `${Math.round(humidity)}%`;
         document.querySelector('.wind-speed').textContent = `${Math.round(windSpeed)} km/h`;
 
         // Mengubah background berdasarkan deskripsi cuaca
         document.body.classList.remove('weather-clear', 'weather-cloudy', 'weather-night');
-        
+
+        this.weatherIcon.data = `./assets/icons/weather-${icon}.svg`;
+
         const hour = new Date().getHours();
-        
+
         // Night time (7PM - 6AM)
         if (hour >= 19 || hour < 6) {
             document.body.classList.add('weather-night');
@@ -135,8 +138,8 @@ class WeatherApp {
             // Day time backgrounds
             if (description.includes('Clear') || description.includes('Sunny')) {
                 document.body.classList.add('weather-clear');
-            } else if (description.includes('Cloud') || description.includes('Fog') || 
-                      description.includes('Rain') || description.includes('Snow') || 
+            } else if (description.includes('Cloud') || description.includes('Fog') ||
+                      description.includes('Rain') || description.includes('Snow') ||
                       description.includes('Drizzle')) {
                 document.body.classList.add('weather-cloudy');
             }
@@ -198,7 +201,7 @@ class WeatherApp {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
         errorDiv.textContent = message;
-        
+
         // Menambahkan pesan error setelah kotak pencarian
         const searchBox = document.querySelector('.search-box');
         searchBox.insertAdjacentElement('afterend', errorDiv);
